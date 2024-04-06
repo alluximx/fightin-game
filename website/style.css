@@ -1,0 +1,1217 @@
+.zerto-landing-page {
+    background-color: #000000;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.zerto-landing-page .div {
+    background-color: #000000;
+    overflow: hidden;
+    width: 1440px;
+    height: 2497px;
+    position: relative;
+}
+
+.zerto-landing-page .overlap {
+    position: absolute;
+    width: 1514px;
+    height: 704px;
+    top: 461px;
+    left: -31px;
+}
+
+.zerto-landing-page .ZERTO {
+    position: absolute;
+    width: 1462px;
+    height: 169px;
+    top: 280px;
+    left: 26px;
+}
+
+.zerto-landing-page .overlap-group {
+    position: relative;
+    width: 1440px;
+    height: 169px;
+    left: 5px;
+    background-image: url(https://c.animaapp.com/jzRuJAGx/img/zerto.png);
+    background-size: 100% 100%;
+}
+
+.zerto-landing-page .text-wrapper {
+    top: 32px;
+    left: 47px;
+    transform: rotate(3.08deg);
+    color: #ffffff;
+    position: absolute;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    font-size: 55px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 52.5px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .ZERTO-2 {
+    top: 43px;
+    left: 280px;
+    transform: rotate(3.08deg);
+    color: #ffffff;
+    position: absolute;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    font-size: 55px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 52.5px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .ZERTO-3 {
+    top: 57px;
+    left: 533px;
+    transform: rotate(3.08deg);
+    color: #ffffff;
+    position: absolute;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    font-size: 55px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 52.5px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .ZERTO-4 {
+    top: 70px;
+    left: 773px;
+    transform: rotate(3.08deg);
+    color: #ffffff;
+    position: absolute;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    font-size: 55px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 52.5px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .ZERTO-5 {
+    top: 84px;
+    left: 1014px;
+    transform: rotate(3.08deg);
+    color: #ffffff;
+    position: absolute;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    font-size: 55px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 52.5px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .ZERTO-6 {
+    top: 99px;
+    left: 1284px;
+    transform: rotate(3.08deg);
+    color: #ffffff;
+    position: absolute;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    font-size: 55px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 52.5px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .group {
+    position: absolute;
+    width: 1505px;
+    height: 172px;
+    top: 265px;
+    left: 4px;
+    transform: rotate(171.2deg);
+}
+
+.zerto-landing-page .overlap-2 {
+    position: relative;
+    width: 1484px;
+    height: 614px;
+    top: -221px;
+    left: 5px;
+}
+
+.zerto-landing-page .img {
+    position: absolute;
+    width: 1440px;
+    height: 398px;
+    top: 108px;
+    left: 22px;
+    transform: rotate(-171.2deg);
+}
+
+.zerto-landing-page .ZERTO-7 {
+    top: 309px;
+    left: 1056px;
+    transform: rotate(-183.17deg);
+    color: var(--zerto-red);
+    position: absolute;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    font-size: 55px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 52.5px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .ZERTO-8 {
+    top: 320px;
+    left: 1314px;
+    transform: rotate(-183.17deg);
+    color: var(--zerto-red);
+    position: absolute;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    font-size: 55px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 52.5px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .ZERTO-9 {
+    top: 295px;
+    left: 803px;
+    transform: rotate(-183.29deg);
+    color: var(--zerto-red);
+    position: absolute;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    font-size: 55px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 52.5px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .ZERTO-10 {
+    top: 281px;
+    left: 563px;
+    transform: rotate(-183.2deg);
+    color: var(--zerto-red);
+    position: absolute;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    font-size: 55px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 52.5px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .ZERTO-11 {
+    top: 268px;
+    left: 322px;
+    transform: rotate(-183.23deg);
+    color: var(--zerto-red);
+    position: absolute;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    font-size: 55px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 52.5px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .ZERTO-12 {
+    top: 253px;
+    left: 63px;
+    transform: rotate(-183.19deg);
+    color: var(--zerto-red);
+    position: absolute;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    font-size: 55px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 52.5px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .group-2 {
+    position: absolute;
+    width: 67px;
+    height: 82px;
+    top: 0;
+    left: 1257px;
+}
+
+.zerto-landing-page .play-now {
+    position: absolute;
+    width: 1024px;
+    height: 637px;
+    top: 67px;
+    left: 239px;
+}
+
+.zerto-landing-page .game {
+    position: absolute;
+    width: 1024px;
+    height: 576px;
+    top: 0;
+    left: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background-image: url(https://c.animaapp.com/jzRuJAGx/img/game.png);
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+.zerto-landing-page .overlap-3 {
+    position: absolute;
+    width: 204px;
+    height: 184px;
+    top: 328px;
+    left: 608px;
+}
+
+.zerto-landing-page .c {
+    position: absolute;
+    width: 188px;
+    height: 182px;
+    top: 0;
+    left: 0;
+    transform: rotate(180deg);
+}
+
+.zerto-landing-page .overlap-4 {
+    position: relative;
+    height: 182px;
+}
+
+.zerto-landing-page .vector {
+    position: absolute;
+    width: 39px;
+    height: 23px;
+    top: 116px;
+    left: 112px;
+    transform: rotate(-180deg);
+}
+
+.zerto-landing-page .group-3 {
+    position: absolute;
+    width: 52px;
+    height: 37px;
+    top: 110px;
+    left: 136px;
+    transform: rotate(-180deg);
+}
+
+.zerto-landing-page .blue-character-wrapper {
+    position: absolute;
+    width: 119px;
+    height: 85px;
+    top: 96px;
+    left: 0;
+}
+
+.zerto-landing-page .blue-character {
+    height: 85px;
+}
+
+.zerto-landing-page .overlap-group-2 {
+    position: relative;
+    width: 119px;
+    height: 85px;
+}
+
+.zerto-landing-page .rectangle {
+    position: absolute;
+    width: 119px;
+    height: 85px;
+    top: 0;
+    left: 0;
+    transform: rotate(-180deg);
+}
+
+.zerto-landing-page .group-4 {
+    position: absolute;
+    width: 65px;
+    height: 6px;
+    top: 61px;
+    left: 41px;
+    transform: rotate(-180deg);
+}
+
+.zerto-landing-page .face {
+    position: absolute;
+    width: 53px;
+    height: 30px;
+    top: 30px;
+    left: 46px;
+}
+
+.zerto-landing-page .rectangle-2 {
+    position: absolute;
+    width: 12px;
+    height: 30px;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    border-radius: 16.97px;
+}
+
+.zerto-landing-page .rectangle-3 {
+    position: absolute;
+    width: 12px;
+    height: 30px;
+    top: 0;
+    left: 42px;
+    background-color: #000000;
+    border-radius: 16.97px;
+}
+
+.zerto-landing-page .vector-2 {
+    position: absolute;
+    width: 22px;
+    height: 83px;
+    top: 2px;
+    left: 25px;
+    transform: rotate(-180deg);
+}
+
+.zerto-landing-page .rectangle-4 {
+    position: absolute;
+    width: 4px;
+    height: 10px;
+    top: 46px;
+    left: 48px;
+    background-color: #ffffffe6;
+    border-radius: 16.97px;
+}
+
+.zerto-landing-page .rectangle-5 {
+    position: absolute;
+    width: 4px;
+    height: 10px;
+    top: 46px;
+    left: 89px;
+    background-color: #ffffffe6;
+    border-radius: 16.97px;
+}
+
+.zerto-landing-page .group-5 {
+    position: absolute;
+    width: 65px;
+    height: 85px;
+    top: 0;
+    left: 10px;
+    transform: rotate(-180deg);
+}
+
+.zerto-landing-page .group-6 {
+    position: absolute;
+    width: 65px;
+    height: 85px;
+    top: 13px;
+    left: 48px;
+    transform: rotate(-180deg);
+}
+
+.zerto-landing-page .shirt {
+    position: absolute;
+    width: 90px;
+    height: 35px;
+    top: 66px;
+    left: 19px;
+    transform: rotate(-180deg);
+}
+
+.zerto-landing-page .vector-3 {
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    top: 74px;
+    left: 66px;
+    transform: rotate(-180deg);
+}
+
+.zerto-landing-page .vector-4 {
+    position: absolute;
+    width: 33px;
+    height: 51px;
+    top: 88px;
+    left: 4px;
+    transform: rotate(-180deg);
+}
+
+.zerto-landing-page .group-7 {
+    position: absolute;
+    width: 49px;
+    height: 30px;
+    top: 92px;
+    left: 27px;
+    transform: rotate(-180deg);
+}
+
+.zerto-landing-page .ellipse {
+    position: absolute;
+    width: 140px;
+    height: 22px;
+    top: 162px;
+    left: 64px;
+    background-color: #3c3b3b33;
+    border-radius: 70px/11px;
+}
+
+.zerto-landing-page .overlap-5 {
+    position: absolute;
+    width: 198px;
+    height: 183px;
+    top: 327px;
+    left: 217px;
+}
+
+.zerto-landing-page .ellipse-2 {
+    position: absolute;
+    width: 140px;
+    height: 22px;
+    top: 161px;
+    left: 0;
+    background-color: #3c3b3b33;
+    border-radius: 70px/11px;
+}
+
+.zerto-landing-page .overlap-wrapper {
+    position: absolute;
+    width: 187px;
+    height: 183px;
+    top: 0;
+    left: 11px;
+}
+
+.zerto-landing-page .overlap-6 {
+    position: relative;
+    height: 183px;
+}
+
+.zerto-landing-page .vector-5 {
+    position: absolute;
+    width: 39px;
+    height: 24px;
+    top: 42px;
+    left: 113px;
+}
+
+.zerto-landing-page .group-8 {
+    position: absolute;
+    width: 52px;
+    height: 37px;
+    top: 34px;
+    left: 135px;
+}
+
+.zerto-landing-page .div-wrapper {
+    position: absolute;
+    width: 120px;
+    height: 86px;
+    top: 0;
+    left: 0;
+}
+
+.zerto-landing-page .overlap-group-wrapper {
+    height: 86px;
+    background-image: url(https://c.animaapp.com/jzRuJAGx/img/rectangle-8989-1.svg);
+    background-size: 100% 100%;
+}
+
+.zerto-landing-page .overlap-group-3 {
+    position: relative;
+    width: 81px;
+    height: 83px;
+    left: 25px;
+}
+
+.zerto-landing-page .group-9 {
+    position: absolute;
+    width: 65px;
+    height: 6px;
+    top: 19px;
+    left: 16px;
+}
+
+.zerto-landing-page .face-2 {
+    position: absolute;
+    width: 54px;
+    height: 30px;
+    top: 26px;
+    left: 21px;
+}
+
+.zerto-landing-page .rectangle-6 {
+    position: absolute;
+    width: 12px;
+    height: 30px;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    border-radius: 17.05px;
+}
+
+.zerto-landing-page .rectangle-7 {
+    position: absolute;
+    width: 12px;
+    height: 30px;
+    top: 0;
+    left: 42px;
+    background-color: #000000;
+    border-radius: 17.05px;
+}
+
+.zerto-landing-page .vector-6 {
+    position: absolute;
+    width: 22px;
+    height: 83px;
+    top: 0;
+    left: 0;
+}
+
+.zerto-landing-page .rectangle-8 {
+    position: absolute;
+    width: 4px;
+    height: 10px;
+    top: 29px;
+    left: 23px;
+    background-color: #ffffffe6;
+    border-radius: 17.05px;
+}
+
+.zerto-landing-page .rectangle-9 {
+    position: absolute;
+    width: 4px;
+    height: 10px;
+    top: 29px;
+    left: 64px;
+    background-color: #ffffffe6;
+    border-radius: 17.05px;
+}
+
+.zerto-landing-page .group-10 {
+    position: absolute;
+    width: 66px;
+    height: 85px;
+    top: 97px;
+    left: 11px;
+}
+
+.zerto-landing-page .group-11 {
+    position: absolute;
+    width: 66px;
+    height: 85px;
+    top: 84px;
+    left: 48px;
+}
+
+.zerto-landing-page .shirt-2 {
+    position: absolute;
+    width: 90px;
+    height: 35px;
+    top: 81px;
+    left: 19px;
+}
+
+.zerto-landing-page .vector-7 {
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    top: 95px;
+    left: 67px;
+}
+
+.zerto-landing-page .vector-8 {
+    position: absolute;
+    width: 34px;
+    height: 51px;
+    top: 43px;
+    left: 4px;
+}
+
+.zerto-landing-page .group-12 {
+    position: absolute;
+    width: 49px;
+    height: 30px;
+    top: 58px;
+    left: 26px;
+}
+
+.zerto-landing-page .play-now-2 {
+    position: absolute;
+    width: 244px;
+    height: 61px;
+    top: 576px;
+    left: 391px;
+}
+
+.zerto-landing-page .overlap-7 {
+    position: relative;
+    width: 242px;
+    height: 61px;
+    background-image: url(https://c.animaapp.com/jzRuJAGx/img/vector.svg);
+    background-size: 100% 100%;
+}
+
+.zerto-landing-page .text-wrapper-2 {
+    position: absolute;
+    width: 120px;
+    top: 13px;
+    left: 61px;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 31.6px;
+    letter-spacing: 3.47px;
+    line-height: 35.2px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .group-13 {
+    position: absolute;
+    width: 75px;
+    height: 82px;
+    top: 615px;
+    left: 183px;
+}
+
+.zerto-landing-page .overlap-8 {
+    position: absolute;
+    width: 1440px;
+    height: 3623px;
+    top: 1481px;
+    left: 0;
+}
+
+.zerto-landing-page .vector-9 {
+    position: absolute;
+    width: 1440px;
+    height: 1016px;
+    top: 0;
+    left: 0;
+}
+
+.zerto-landing-page .right-circle-icon {
+    position: absolute;
+    width: 36px;
+    height: 2989px;
+    top: 634px;
+    left: 140px;
+    transform: rotate(180deg);
+}
+
+.zerto-landing-page .ellipse-3 {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    top: 0;
+    left: 0;
+    background-color: #f7f7f7;
+    border-radius: 18px;
+}
+
+.zerto-landing-page .element-arrow-up {
+    position: absolute;
+    width: 13px;
+    height: 5px;
+    top: 2984px;
+    left: 11px;
+    transform: rotate(-180deg);
+}
+
+.zerto-landing-page .menu {
+    position: absolute;
+    width: 108px;
+    height: 28px;
+    top: 831px;
+    left: 1225px;
+}
+
+.zerto-landing-page .social {
+    position: relative;
+    height: 28px;
+}
+
+.zerto-landing-page .element {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    top: 0;
+    left: 0;
+    background-color: var(--zerto-red);
+    border-radius: 14px;
+}
+
+.zerto-landing-page .logo-twitter {
+    position: absolute;
+    width: 11px;
+    height: 9px;
+    top: 10px;
+    left: 9px;
+}
+
+.zerto-landing-page .logo-fb-simple-wrapper {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    top: 0;
+    left: 40px;
+    background-color: var(--zerto-red);
+    border-radius: 14px;
+}
+
+.zerto-landing-page .logo-fb-simple {
+    position: absolute;
+    width: 6px;
+    height: 12px;
+    top: 8px;
+    left: 11px;
+}
+
+.zerto-landing-page .logo-instagram-wrapper {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    top: 0;
+    left: 80px;
+    background-color: var(--zerto-red);
+    border-radius: 14px;
+}
+
+.zerto-landing-page .logo-instagram {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 7px;
+    left: 7px;
+}
+
+.zerto-landing-page .frame {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 37px;
+    position: absolute;
+    top: 836px;
+    left: 463px;
+}
+
+.zerto-landing-page .lorem-ipsum {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 17.8px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .line {
+    position: absolute;
+    width: 1233px;
+    height: 1px;
+    top: 903px;
+    left: 100px;
+    object-fit: cover;
+}
+
+.zerto-landing-page .copyright {
+    position: absolute;
+    top: 948px;
+    left: 560px;
+    font-family: var(--regular-13px-font-family);
+    font-weight: var(--regular-13px-font-weight);
+    color: #000000;
+    font-size: var(--regular-13px-font-size);
+    text-align: center;
+    letter-spacing: var(--regular-13px-letter-spacing);
+    line-height: var(--regular-13px-line-height);
+    white-space: nowrap;
+    font-style: var(--regular-13px-font-style);
+}
+
+.zerto-landing-page .CS {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 69px;
+    position: absolute;
+    top: 80px;
+    left: 175px;
+}
+
+.zerto-landing-page .group-14 {
+    position: relative;
+    width: 899.18px;
+    height: 154.15px;
+}
+
+.zerto-landing-page .text-wrapper-3 {
+    position: absolute;
+    width: 897px;
+    top: 78px;
+    left: 0;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 80px;
+    text-align: center;
+    letter-spacing: -3.2px;
+    line-height: 76.4px;
+}
+
+.zerto-landing-page .group-15 {
+    position: absolute;
+    width: 76px;
+    height: 65px;
+    top: 0;
+    left: 635px;
+}
+
+.zerto-landing-page .CS-2 {
+    display: inline-flex;
+    align-items: center;
+    gap: 38px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.zerto-landing-page .img-layout-left {
+    position: relative;
+    width: 496px;
+    height: 422px;
+    background-color: #d9d9d9;
+}
+
+.zerto-landing-page .group-16 {
+    position: relative;
+    width: 565px;
+    height: 452px;
+}
+
+.zerto-landing-page .button-component {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    width: 162px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 8px;
+    position: absolute;
+    top: 392px;
+    left: 0;
+    background-color: var(--zerto-red);
+}
+
+.zerto-landing-page .text-wrapper-4 {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Inter", Helvetica;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .b {
+    top: 0;
+    position: absolute;
+    width: 567px;
+    height: 70px;
+    left: 0;
+}
+
+.zerto-landing-page .vuesax-linear-tick {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    top: 7px;
+    left: 0;
+}
+
+.zerto-landing-page .p {
+    position: absolute;
+    width: 527px;
+    top: 0;
+    left: 38px;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 600;
+    color: #1f1e1e;
+    font-size: 22px;
+    letter-spacing: 0;
+    line-height: 35.2px;
+}
+
+.zerto-landing-page .b-2 {
+    top: 94px;
+    position: absolute;
+    width: 567px;
+    height: 70px;
+    left: 0;
+}
+
+.zerto-landing-page .text-wrapper-5 {
+    position: absolute;
+    width: 527px;
+    top: 0;
+    left: 38px;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 600;
+    color: #201f1f;
+    font-size: 22px;
+    letter-spacing: 0;
+    line-height: 35.2px;
+}
+
+.zerto-landing-page .b-3 {
+    top: 188px;
+    position: absolute;
+    width: 567px;
+    height: 70px;
+    left: 0;
+}
+
+.zerto-landing-page .b-4 {
+    top: 282px;
+    position: absolute;
+    width: 567px;
+    height: 70px;
+    left: 0;
+}
+
+.zerto-landing-page .overlap-9 {
+    position: absolute;
+    width: 926px;
+    height: 158px;
+    top: 160px;
+    left: 242px;
+}
+
+.zerto-landing-page .recovery-rumble-dell {
+    position: absolute;
+    width: 897px;
+    top: 59px;
+    left: 29px;
+    font-family: var(--h-1-font-family);
+    font-weight: var(--h-1-font-weight);
+    color: #ffffff;
+    font-size: var(--h-1-font-size);
+    text-align: center;
+    letter-spacing: var(--h-1-letter-spacing);
+    line-height: var(--h-1-line-height);
+    font-style: var(--h-1-font-style);
+}
+
+.zerto-landing-page .group-17 {
+    position: absolute;
+    width: 76px;
+    height: 64px;
+    top: 0;
+    left: 0;
+}
+
+.zerto-landing-page .subtitle-text {
+    position: absolute;
+    width: 834px;
+    top: 372px;
+    left: 301px;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 80px;
+    text-align: center;
+    letter-spacing: -3.2px;
+    line-height: 76.4px;
+}
+
+.zerto-landing-page .m-u {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 500px;
+    position: absolute;
+    top: 1209px;
+    left: 274px;
+}
+
+.zerto-landing-page .div-2 {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 45px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.zerto-landing-page .text-wrapper-6 {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    color: var(--zerto-red);
+    font-size: 60px;
+    text-align: center;
+    letter-spacing: -2.4px;
+    line-height: 57.3px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .SE {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 49px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.zerto-landing-page .s-ALES {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 40px;
+    text-align: center;
+    letter-spacing: -1.6px;
+    line-height: 38.2px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .ENGINEERING {
+    position: relative;
+    width: fit-content;
+    font-family: "Bebas Neue", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 40px;
+    text-align: center;
+    letter-spacing: -1.6px;
+    line-height: 38.2px;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .header {
+    position: absolute;
+    width: 1440px;
+    height: 125px;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 4px 4px #00000080;
+}
+
+.zerto-landing-page .header-2 {
+    display: inline-flex;
+    align-items: center;
+    gap: 500px;
+    position: relative;
+    top: 23px;
+    left: 72px;
+}
+
+.zerto-landing-page .layer {
+    position: relative;
+    width: 152px;
+    height: 77.67px;
+}
+
+.zerto-landing-page .header-wrapper {
+    display: inline-flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 454px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.zerto-landing-page .header-3 {
+    position: relative;
+    width: 682px;
+    height: 49px;
+}
+
+.zerto-landing-page .button {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    width: 162px;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 8px;
+    position: absolute;
+    top: 0;
+    left: 520px;
+    background-color: var(--zerto-red);
+}
+
+.zerto-landing-page .text-wrapper-7 {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Inter", Helvetica;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.zerto-landing-page .nav-link-grp {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 60px;
+    position: absolute;
+    top: 14px;
+    left: 0;
+}
+
+.zerto-landing-page .nav-link-comp {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.zerto-landing-page .text-wrapper-8 {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Open Sans", Helvetica;
+    font-weight: 600;
+    color: #aaaaaa;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.zerto-landing-page .nav-link-wrapper {
+    display: inline-flex;
+    align-items: flex-start;
+    position: relative;
+    flex: 0 0 auto;
+}

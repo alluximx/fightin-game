@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="styleguide.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Press Start 2P', cursive;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+
+
+        <div class="zerto-landing-page">
+            <div class="div">
+                <div class="overlap">
+                    <div class="ZERTO">
+                        <div class="overlap-group">
+                            <div class="text-wrapper">Zerto</div>
+                            <div class="ZERTO-2">Zerto</div>
+                            <div class="ZERTO-3">Zerto</div>
+                            <div class="ZERTO-4">Zerto</div>
+                            <div class="ZERTO-5">Zerto</div>
+                            <div class="ZERTO-6">Zerto</div>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <div class="overlap-2">
+                            <img class="img" src="https://c.animaapp.com/jzRuJAGx/img/group-1000001759.png" />
+                            <div class="ZERTO-7">Zerto</div>
+                            <div class="ZERTO-8">Zerto</div>
+                            <div class="ZERTO-9">Zerto</div>
+                            <div class="ZERTO-10">Zerto</div>
+                            <div class="ZERTO-11">Zerto</div>
+                            <div class="ZERTO-12">Zerto</div>
+                        </div>
+                    </div>
+                    <img class="group-2" src="https://c.animaapp.com/jzRuJAGx/img/group-1000001700@2x.png" />
+                    <div class="play-now">
+                        <!-- red container div -->
+                        <div class="gameInfo" style="display: none; z-index: 99; position: absolute; width: 100%;">
+                            <!-- smaller red container div -->
+                            <div style="display: flex;">
+                                <!-- player health -->
+                                <div style="
+                                position: relative;
+                                width: 100%;
+                                display: flex;
+                                justify-content: flex-end;
+                                border-top: 4px solid white;
+                                border-left: 4px solid white;
+                                border-bottom: 4px solid white;
+                                ">
+                                    <div style="background-color: red; height: 100%; width: 100%"></div>
+                                    <div id="playerHealth" style="
+                                    position: absolute;
+                                    background: #818cf8;
+                                    top: 0;
+                                    right: 0;
+                                    bottom: 0;
+                                    width: 100%;
+                                "></div>
+                                </div>
+
+                                <!-- timer -->
+                                <div id="timer" style="
+                                background-color: black;
+                                width: 100px;
+                                height: 50px;
+                                flex-shrink: 0;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                color: white;
+                                border: 4px solid white;
+                                ">
+                                    10
+                                </div>
+                                <!-- enemy health -->
+                                <div style="
+                                position: relative;
+                                width: 100%;
+                                border-top: 4px solid white;
+                                border-bottom: 4px solid white;
+                                border-right: 4px solid white;
+                                ">
+                                    <div style="background-color: red; height: 100%;"></div>
+                                    <div id="enemyHealth" style="
+                                    position: absolute;
+                                    background: #818cf8;
+                                    top: 0;
+                                    right: 0;
+                                    bottom: 0;
+                                    left: 0;
+                                "></div>
+                                </div>
+                                <div></div>
+                            </div>
+                            <div id="displayText" style="
+                                position: relative;
+                                color: white;
+                                align-items: center;
+                                justify-content: center;
+                                top: 150px;
+                                right: 0;
+                                bottom: 0;
+                                left: 0;
+                                display: none;
+                                font-size: 50px;
+                                font-family: 'Bebas Neue';
+                                font-size: 50px;
+                            ">
+                                Tie
+                            </div>
+                        </div>
+
+                        <canvas></canvas>
+
+                        <div class="game">
+                            <div class="overlap-3">
+                                <div class="c">
+                                    <div class="overlap-4">
+                                        <img class="vector" src="https://c.animaapp.com/jzRuJAGx/img/vector-1120.svg" />
+                                        <img class="group-3" src="https://c.animaapp.com/jzRuJAGx/img/group-1000001793@2x.png" />
+                                        <div class="blue-character-wrapper">
+                                            <div class="blue-character">
+                                                <div class="overlap-group-2">
+                                                    <img class="rectangle" src="https://c.animaapp.com/jzRuJAGx/img/rectangle-8989.svg" />
+                                                    <img class="group-4" src="https://c.animaapp.com/jzRuJAGx/img/group-36@2x.png" />
+                                                    <div class="face">
+                                                        <div class="rectangle-2"></div>
+                                                        <div class="rectangle-3"></div>
+                                                    </div>
+                                                    <img class="vector-2" src="https://c.animaapp.com/jzRuJAGx/img/vector-11.svg" />
+                                                    <div class="rectangle-4"></div>
+                                                    <div class="rectangle-5"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img class="group-5" src="https://c.animaapp.com/jzRuJAGx/img/group-1000001795@2x.png" />
+                                        <img class="group-6" src="https://c.animaapp.com/jzRuJAGx/img/group-1000001796@2x.png" />
+                                        <img class="shirt" src="https://c.animaapp.com/jzRuJAGx/img/shirt@2x.png" />
+                                        <img class="vector-3" src="https://c.animaapp.com/jzRuJAGx/img/vector-1122.svg" />
+                                        <img class="vector-4" src="https://c.animaapp.com/jzRuJAGx/img/vector-1121.svg" />
+                                        <img class="group-7" src="https://c.animaapp.com/jzRuJAGx/img/group-1000001794@2x.png" />
+                                    </div>
+                                </div>
+                                <div class="ellipse"></div>
+                            </div>
+                            <div class="overlap-5">
+                                <div class="ellipse-2"></div>
+                                <div class="overlap-wrapper">
+                                    <div class="overlap-6">
+                                        <img class="vector-5" src="https://c.animaapp.com/jzRuJAGx/img/vector-1120-1.svg" />
+                                        <img class="group-8" src="https://c.animaapp.com/jzRuJAGx/img/group-1000001793-1@2x.png" />
+                                        <div class="div-wrapper">
+                                            <div class="overlap-group-wrapper">
+                                                <div class="overlap-group-3">
+                                                    <img class="group-9" src="https://c.animaapp.com/jzRuJAGx/img/group-36-1@2x.png" />
+                                                    <div class="face-2">
+                                                        <div class="rectangle-6"></div>
+                                                        <div class="rectangle-7"></div>
+                                                    </div>
+                                                    <img class="vector-6" src="https://c.animaapp.com/jzRuJAGx/img/vector-11-1.svg" />
+                                                    <div class="rectangle-8"></div>
+                                                    <div class="rectangle-9"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img class="group-10" src="https://c.animaapp.com/jzRuJAGx/img/group-1000001795-1@2x.png" />
+                                        <img class="group-11" src="https://c.animaapp.com/jzRuJAGx/img/group-1000001796-1@2x.png" />
+                                        <img class="shirt-2" src="https://c.animaapp.com/jzRuJAGx/img/shirt-1@2x.png" />
+                                        <img class="vector-7" src="https://c.animaapp.com/jzRuJAGx/img/vector-1122-1.svg" />
+                                        <img class="vector-8" src="https://c.animaapp.com/jzRuJAGx/img/vector-1121-1.svg" />
+                                        <img class="group-12" src="https://c.animaapp.com/jzRuJAGx/img/group-1000001794-1@2x.png" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="play-now-2">
+                            <div class="overlap-7">
+                                <div class="text-wrapper-2">Play Now</div>
+                            </div>
+                        </div>
+                    </div>
+                    <img class="group-13" src="https://c.animaapp.com/jzRuJAGx/img/group-1000001762@2x.png" />
+                </div>
+                <div class="overlap-8">
+                    <img class="vector-9" src="https://c.animaapp.com/jzRuJAGx/img/vector-1104.svg" />
+                    <div class="right-circle-icon">
+                        <div class="ellipse-3"></div>
+                        <img class="element-arrow-up" src="https://c.animaapp.com/jzRuJAGx/img/2867863-arrow-up-icon.svg" />
+                    </div>
+                    <div class="menu">
+                        <div class="social">
+                            <div class="element">
+                                <img class="logo-twitter" src="https://c.animaapp.com/jzRuJAGx/img/logo-twitter-2@2x.png" />
+                            </div>
+                            <div class="logo-fb-simple-wrapper">
+                                <img class="logo-fb-simple" src="https://c.animaapp.com/jzRuJAGx/img/logo-fb-simple-2@2x.png" />
+                            </div>
+                            <div class="logo-instagram-wrapper">
+                                <img class="logo-instagram" src="https://c.animaapp.com/jzRuJAGx/img/logo-instagram-1@2x.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="frame">
+                        <div class="lorem-ipsum">Lorem Ipsum</div>
+                        <div class="lorem-ipsum">Lorem Ipsum</div>
+                        <div class="lorem-ipsum">Lorem Ipsum</div>
+                        <div class="lorem-ipsum">Lorem Ipsum</div>
+                    </div>
+                    <img class="line" src="https://c.animaapp.com/jzRuJAGx/img/line-63.svg" />
+                    <p class="copyright">© Copyright 2024, All Rights Reserved by Zerto</p>
+                    <div class="CS">
+                        <div class="group-14">
+                            <div class="text-wrapper-3">Customer Story</div>
+                            <img class="group-15" src="https://c.animaapp.com/jzRuJAGx/img/group-1@2x.png" />
+                        </div>
+                        <div class="CS-2">
+                            <div class="img-layout-left"></div>
+                            <div class="group-16">
+                                <button class="button-component"><div class="text-wrapper-4">Button</div></button>
+                                <div class="b">
+                                    <img class="vuesax-linear-tick" src="https://c.animaapp.com/jzRuJAGx/img/vuesax-linear-tick-circle-4.svg" />
+                                    <p class="p">Lorem ipsum dolor sit amet consectetur. Elementum nisl duis tortor sed.</p>
+                                </div>
+                                <div class="b-2">
+                                    <img class="vuesax-linear-tick" src="https://c.animaapp.com/jzRuJAGx/img/vuesax-linear-tick-circle-4.svg" />
+                                    <p class="text-wrapper-5">Lorem ipsum dolor sit amet consectetur. Elementum nisl duis tortor sed.</p>
+                                </div>
+                                <div class="b-3">
+                                    <img class="vuesax-linear-tick" src="https://c.animaapp.com/jzRuJAGx/img/vuesax-linear-tick-circle-4.svg" />
+                                    <p class="text-wrapper-5">Lorem ipsum dolor sit amet consectetur. Elementum nisl duis tortor sed.</p>
+                                </div>
+                                <div class="b-4">
+                                    <img class="vuesax-linear-tick" src="https://c.animaapp.com/jzRuJAGx/img/vuesax-linear-tick-circle-4.svg" />
+                                    <p class="text-wrapper-5">Lorem ipsum dolor sit amet consectetur. Elementum nisl duis tortor sed.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="overlap-9">
+                    <div class="recovery-rumble-dell">Recovery Rumble: Dell Emc</div>
+                    <img class="group-17" src="https://c.animaapp.com/jzRuJAGx/img/group@2x.png" />
+                </div>
+                <div class="subtitle-text">Subtitle Text</div>
+                <div class="m-u">
+                    <div class="div-2">
+                        <div class="text-wrapper-6">Main Event</div>
+                        <div class="SE">
+                            <div class="s-ALES">Sales</div>
+                            <div class="ENGINEERING">Engineering</div>
+                        </div>
+                    </div>
+                    <div class="div-2">
+                        <div class="text-wrapper-6">Undercard</div>
+                        <div class="SE">
+                            <div class="s-ALES">Sales</div>
+                            <div class="ENGINEERING">Engineering</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header">
+                    <div class="header-2">
+                        <img class="layer" src="https://c.animaapp.com/jzRuJAGx/img/layer-1@2x.png" />
+                        <div class="header-wrapper">
+                            <div class="header-3">
+                                <button class="button"><div class="text-wrapper-7">Button</div></button>
+                                <div class="nav-link-grp">
+                                    <div class="nav-link-comp">
+                                        <div class="text-wrapper-8">Link 1</div>
+                                    </div>
+                                    <div class="nav-link-wrapper">
+                                        <div class="text-wrapper-8">Link 2</div>
+                                    </div>
+                                    <div class="nav-link-wrapper">
+                                        <div class="text-wrapper-8">Link 3</div>
+                                    </div>
+                                    <div class="nav-link-wrapper">
+                                        <div class="text-wrapper-8">Link 4</div>
+                                    </div>
+                                    <div class="text-wrapper-8">Link 5</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="./static/js/utils.js"></script>
+        <script src="./static/js/classes.js"></script>
+        <script src="./index.js"></script>
+</body>
+
+</html>
