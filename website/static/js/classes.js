@@ -131,6 +131,11 @@ class Fighter extends Sprite {
         this.isAttacking = true
     }
 
+    attack2() {
+        this.switchSprite('attack2')
+        this.isAttacking = true
+    }
+
     takeHit() {
         if (this === enemy) {
             this.health -= 10; // Enemy's hits do 10 damage
@@ -156,6 +161,13 @@ class Fighter extends Sprite {
         if (
             this.image === this.sprites.attack1.image &&
             this.framesCurrent < this.sprites.attack1.framesMax - 1
+        )
+            return
+
+        // overriding all other animations with the attack animation
+        if (
+            this.image === this.sprites.attack2.image &&
+            this.framesCurrent < this.sprites.attack2.framesMax - 1
         )
             return
 
@@ -198,7 +210,13 @@ class Fighter extends Sprite {
                     this.framesCurrent = 0
                 }
                 break
-
+            case 'attack2':
+                if (this.image !== this.sprites.attack2.image) {
+                    this.image = this.sprites.attack2.image
+                    this.framesMax = this.sprites.attack2.framesMax
+                    this.framesCurrent = 0
+                }
+                break
             case 'takeHit':
                 if (this.image !== this.sprites.takeHit.image) {
                     this.image = this.sprites.takeHit.image

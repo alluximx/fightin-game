@@ -50,6 +50,23 @@ function determineWinner({ player, enemy, timerId }) {
     } else if (player.health < enemy.health) {
         document.querySelector('#displayText').innerHTML = 'Player 2 Wins'
     }
+
+    setTimeout(showPlayAgainImage, 5000);
+}
+
+function showPlayAgainImage() {
+    const playNowDiv = document.querySelector('.play-now');
+    playNowDiv.innerHTML = ''; // Clear the canvas and game info
+
+    const playAgainImageElement = document.createElement('img');
+    playAgainImageElement.src = playAgainImage.src;
+    playAgainImageElement.classList.add('play-again-btn'); // Add a class to the image element
+    playNowDiv.appendChild(playAgainImageElement);
+
+    // Attach a click event listener to the image element
+    const playAgainBtn = document.querySelector('.play-again-btn');
+    playAgainBtn.addEventListener('click', gameReset);
+
 }
 
 let timer = 60

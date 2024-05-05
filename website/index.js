@@ -1,19 +1,38 @@
 //const canvas = document.querySelector('canvas')
 const canvas = document.createElement('canvas');
+let gameEnded = false;
+let gameInit = true;
+
+gsap.ticker.fps(60); // Set target frame rate to 60 FPS
 
 
-const playNowButton = document.querySelector('.play-now-2'); // Adjust if the class name for the button is different
-playNowButton.addEventListener('click', function() {
+let gameInfoElement = null;
+
+
+const playNowButton = document.querySelector('.play-now'); // Adjust if the class name for the button is different
+const gameReset = () => {
+
+    console.log(gameInit, gameEnded, player.health, enemy.health)
+
+    if (!gameInit && (!gameEnded && player.health > 0 && enemy.health > 0)) {
+        // Game is still in progress, do not reset
+        console.log("Game is still in progress, do not reset")
+        return;
+    }
+
     const playNowDiv = document.querySelector('.play-now'); // This is the container where the game will be displayed
     const gameInfo = document.querySelector('.gameInfo');
+
+    // Store a reference to the gameInfo element
+    if (!gameInfoElement) {
+        gameInfoElement = gameInfo.cloneNode(true);
+    }
 
     playNowDiv.innerHTML = ''; // Clear existing content
 
     // Show the game info (health bars and timer)
-    gameInfo.style.display = 'inline-block'; // Or "block", depending on your layout
-
-    playNowDiv.appendChild(gameInfo); // Add the canvas to the div
-
+    gameInfoElement.style.display = 'inline-block'; // Or "block", depending on your layout
+    playNowDiv.appendChild(gameInfoElement); // Add the gameInfo element back to the div
     playNowDiv.appendChild(canvas); // Add the canvas to the div
 
     // Call any initialization functions for your game here, if necessary
@@ -21,9 +40,33 @@ playNowButton.addEventListener('click', function() {
     canvas.width = 1024; // Set canvas width
     canvas.height = 576; // Set canvas height
 
+    // Reset player and enemy health
+    player.health = 100;
+    enemy.health = 100;
+    document.querySelector('#playerHealth').style.width = '100%';
+    document.querySelector('#enemyHealth').style.width = '100%';
+    document.querySelector('#displayText').style.display = 'none';
+
+    // Reset player and enemy state
+    player.dead = false;
+    enemy.dead = false;
+    player.isAttacking = false;
+    enemy.isAttacking = false;
+    player.framesCurrent = 0;
+    enemy.framesCurrent = 0;
+
+    // Reset player and enemy sprites to their idle state
+    player.switchSprite('run');
+    enemy.switchSprite('run');
+
+    // Reset player and enemy positions
+    player.position = { x: canvas.width / 4, y: 0 };
+    enemy.position = { x: 400, y: 100 };
 
     animate(); // Start the game animation or any initialization function
-});
+};
+
+playNowButton.addEventListener('click', gameReset);
 
 const c = canvas.getContext('2d')
 const startSound = new Audio('./static/audio/boxing_ring.wav');
@@ -32,6 +75,10 @@ const hitSounds = [
     new Audio('./static/audio/10.ogg'),
     new Audio('./static/audio/11.ogg')
 ];
+
+const playAgainImage = new Image();
+playAgainImage.src = './static/img/play-again.png';
+
 let currentHitSoundIndex = 0;
 
 canvas.width = 1024
@@ -96,7 +143,11 @@ const player = new Fighter({
             framesMax: 2
         },
         attack1: {
-            imageSrc: './static/img/zerto/Attack1.png',
+            imageSrc: './static/img/zerto/Uppercut.png',
+            framesMax: 6
+        },
+        attack2: {
+            imageSrc: './static/img/zerto/Attack2.png',
             framesMax: 4
         },
         takeHit: {
@@ -105,6 +156,10 @@ const player = new Fighter({
         },
         death: {
             imageSrc: './static/img/zerto/Death.png',
+            framesMax: 6
+        },
+        uppercut: {
+            imageSrc: './static/img/zerto/Uppercut.png',
             framesMax: 6
         }
     },
@@ -156,12 +211,20 @@ const enemy = new Fighter({
             imageSrc: './static/img/kenji/Attack1.png',
             framesMax: 4
         },
+        attack2: {
+            imageSrc: './static/img/kenji/Attack2.png',
+            framesMax: 4
+        },
         takeHit: {
             imageSrc: './static/img/kenji/Take Hit.png',
             framesMax: 4
         },
         death: {
             imageSrc: './static/img/kenji/Death.png',
+            framesMax: 6
+        },
+        uppercut: {
+            imageSrc: './static/img/kenji/Uppercut.png',
             framesMax: 6
         }
     },
@@ -194,6 +257,7 @@ const keys = {
 decreaseTimer()
 
 function animate() {
+    gameInit = false
     startSound.play();
     enemyAI();
     window.requestAnimationFrame(animate)
@@ -212,10 +276,10 @@ function animate() {
 
     // player movement
 
-    if (keys.a.pressed && player.lastKey === 'a') {
+    if (keys.a.pressed && player.lastKey === 'ArrowLeft') {
         player.velocity.x = -5
         player.switchSprite('run')
-    } else if (keys.d.pressed && player.lastKey === 'd') {
+    } else if (keys.d.pressed && player.lastKey === 'ArrowRight') {
         player.velocity.x = 5
         player.switchSprite('run')
     } else {
@@ -278,7 +342,10 @@ function animate() {
 
     // end game based on health
     if (enemy.health <= 0 || player.health <= 0) {
-        determineWinner({ player, enemy, timerId })
+        if (!gameEnded) {
+            gameEnded = true
+            determineWinner({ player, enemy, timerId })
+        }
     }
 }
 
@@ -299,76 +366,81 @@ window.addEventListener('keydown', function(event) {
 window.addEventListener('keydown', (event) => {
     if (!player.dead) {
         switch (event.key) {
-            case 'd':
-                keys.d.pressed = true
-                player.lastKey = 'd'
-                break
-            case 'a':
-                keys.a.pressed = true
-                player.lastKey = 'a'
-                break
-            case 'w':
-                player.velocity.y = -20
-                break
-            case ' ':
-                player.attack()
-                break
+            case 'ArrowRight':
+                keys.d.pressed = true;
+                player.lastKey = 'ArrowRight';
+                break;
+            case 'ArrowLeft':
+                keys.a.pressed = true;
+                player.lastKey = 'ArrowLeft';
+                break;
+            case 'ArrowUp':
+                player.velocity.y = -20;
+                break;
+            case 'A':
+                player.attack();
+                break;
+            case 'S':
+                player.attack2();
+                break;
         }
     }
-})
+});
 
 window.addEventListener('keyup', (event) => {
     switch (event.key) {
-        case 'd':
+        case 'ArrowRight':
             keys.d.pressed = false
             break
-        case 'a':
+        case 'ArrowLeft':
             keys.a.pressed = false
             break
     }
-
-
 })
 
 
 function enemyAI() {
-    const screenCenterX = canvas.width / 2;
-    const enemyDistanceFromCenter = enemy.position.x - screenCenterX;
-    const moveDirection = Math.random() < 0.5 ? -1 : 1; // Randomly choose a direction for minor movements
 
-    // Basic left and right movement logic with slight randomness
-    if (enemyDistanceFromCenter < -50 || Math.random() < 0.1) {
-        enemy.velocity.x = 3 * moveDirection; // Move in random direction when too left or occasionally
-        enemy.switchSprite('run');
-    } else if (enemyDistanceFromCenter > 50 || Math.random() < 0.1) {
-        enemy.velocity.x = -3 * moveDirection; // Move in random direction when too right or occasionally
-        enemy.switchSprite('run');
-    } else {
-        // Introduce a slight chance to move in the opposite direction even when in the center
-        if (Math.random() < 0.05) {
-            enemy.velocity.x = 2 * moveDirection;
+
+    if (!enemy.dead) {
+        const screenCenterX = canvas.width / 2;
+        const enemyDistanceFromCenter = enemy.position.x - screenCenterX;
+        const moveDirection = Math.random() < 0.5 ? -1 : 1; // Randomly choose a direction for minor movements
+
+        // Basic left and right movement logic with slight randomness
+        if (enemyDistanceFromCenter < -50 || Math.random() < 0.1) {
+            enemy.velocity.x = 3 * moveDirection; // Move in random direction when too left or occasionally
+            enemy.switchSprite('run');
+        } else if (enemyDistanceFromCenter > 50 || Math.random() < 0.1) {
+            enemy.velocity.x = -3 * moveDirection; // Move in random direction when too right or occasionally
             enemy.switchSprite('run');
         } else {
-            enemy.velocity.x = 0;
-            enemy.switchSprite('idle');
+            // Introduce a slight chance to move in the opposite direction even when in the center
+            if (Math.random() < 0.05) {
+                enemy.velocity.x = 2 * moveDirection;
+                enemy.switchSprite('run');
+            } else {
+                enemy.velocity.x = 0;
+                enemy.switchSprite('idle');
+            }
         }
-    }
 
-    // Occasionally jump
-    if (Math.random() < 0.02 && enemy.position.y >= canvas.height - 96 - enemy.height) { // Check if on ground
-        enemy.velocity.y = -15; // Trigger jump
-    }
-
-    // Attack logic remains the same
-    if (!enemy.isAttacking && Math.random() < 0.05) {
-        const randomAction = Math.random();
-        if (randomAction < 0.6) {
-            enemy.attack();
+        // Occasionally jump
+        if (Math.random() < 0.02 && enemy.position.y >= canvas.height - 96 - enemy.height) { // Check if on ground
+            enemy.velocity.y = -15; // Trigger jump
         }
-    }
 
-    // Ensure enemy doesn't fall through the ground
-    if (enemy.position.y + enemy.height + enemy.velocity.y >= canvas.height - 96) {
-        enemy.velocity.y = 0;
+        // Attack logic remains the same
+        if (!enemy.isAttacking && Math.random() < 0.05) {
+            const randomAction = Math.random();
+            if (randomAction < 0.6) {
+                enemy.attack();
+            }
+        }
+
+        // Ensure enemy doesn't fall through the ground
+        if (enemy.position.y + enemy.height + enemy.velocity.y >= canvas.height - 96) {
+            enemy.velocity.y = 0;
+        }
     }
 }
