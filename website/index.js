@@ -12,8 +12,6 @@ let gameInfoElement = null;
 const playNowButton = document.querySelector('.play-now'); // Adjust if the class name for the button is different
 const gameReset = () => {
 
-    console.log(gameInit, gameEnded, player.health, enemy.health)
-
     if (!gameInit && (!gameEnded && player.health > 0 && enemy.health > 0)) {
         // Game is still in progress, do not reset
         console.log("Game is still in progress, do not reset")
@@ -314,12 +312,21 @@ function animate() {
         player.isAttacking &&
         player.framesCurrent === 2
     ) {
-        playHitSound();
-        enemy.takeHit();
-        player.isAttacking = false;
-        gsap.to('#enemyHealth', {
-            width: enemy.health + '%'
-        });
+
+        if (enemy.isBlocking) {
+            console.log('enemy is blocking')
+                // Player is blocking, reduce or negate the damage
+                // For example, you can reduce the damage by half
+        } else {
+            // Player is not blocking, apply full damage
+            playHitSound();
+            enemy.takeHit();
+            player.isAttacking = false;
+
+            gsap.to('#enemyHealth', { width: enemy.health + '%' });
+        }
+
+
     }
 
 
@@ -340,13 +347,18 @@ function animate() {
         }) &&
         enemy.isAttacking &&
         enemy.framesCurrent == 0 &&
-        enemy.framesCurrent <= 2 &&
-        !player.isBlocking // Check if player is not blocking
+        enemy.framesCurrent <= 2
     ) {
-        playHitSound();
-        player.takeHit();
+        if (player.isBlocking) {
+            // Player is blocking, reduce or negate the damage
+            // For example, you can reduce the damage by half
+        } else {
+            // Player is not blocking, apply full damage
+            playHitSound();
+            player.takeHit();
+            gsap.to('#playerHealth', { width: player.health + '%' });
+        }
         enemy.isAttacking = false;
-        gsap.to('#playerHealth', { width: player.health + '%' });
     }
 
     if (enemy.isBlocking && enemy.framesCurrent === 2) {
@@ -458,13 +470,13 @@ function enemyAI() {
         // Attack and block logic
         if (!enemy.isAttacking && Math.random() < 0.05) {
             const randomAction = Math.random();
-            if (randomAction < 0.6) {
+            if (randomAction < 0.6 && !player.isBlocking) {
                 enemy.attack();
-            } else if (randomAction < 0.8) {
-                // Slight chance to block
+            } else if (randomAction < 0.2) {
                 enemy.block();
             }
         }
+
 
 
         // Ensure enemy doesn't fall through the ground

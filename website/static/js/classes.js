@@ -61,6 +61,7 @@ class Fighter extends Sprite {
         scale = 1,
         framesMax = 1,
         blockTimer = 30, // Duration in frames (adjust as needed)
+        blockDuration = 15, // Duration in frames (adjust as needed)
         offset = { x: 0, y: 0 },
         sprites,
         attackBox = { offset: {}, width: undefined, height: undefined }
@@ -72,6 +73,7 @@ class Fighter extends Sprite {
             framesMax,
             offset
         })
+        this.blockDuration = blockDuration;
         this.blockTimer = blockTimer;
         this.velocity = velocity
         this.width = 625
@@ -121,9 +123,9 @@ class Fighter extends Sprite {
         this.position.y += this.velocity.y
 
         // Decrement the block timer
-        if (this.isBlocking && this.blockTimer > 0) {
+        if (this.isBlocking) {
             this.blockTimer--;
-            if (this.blockTimer === 0) {
+            if (this.blockTimer <= 0) {
                 this.isBlocking = false;
             }
         }
@@ -147,14 +149,15 @@ class Fighter extends Sprite {
 
     block() {
         this.switchSprite('block')
+        this.blockTimer = this.blockDuration;
         this.isBlocking = true
     }
 
     takeHit() {
         if (this === enemy) {
-            this.health -= 10; // Enemy's hits do 10 damage
+            this.health -= 5; // Enemy's hits do 10 damage
         } else {
-            this.health -= 1; // Player's hits do 20 damage
+            this.health -= 2; // Player's hits do 20 damage
         }
 
         if (this.health <= 0) {
@@ -169,6 +172,14 @@ class Fighter extends Sprite {
             if (this.framesCurrent === this.sprites.death.framesMax - 1)
                 this.dead = true
             return
+        }
+
+        // Check if the current animation is the block animation and the block duration is active
+        if (
+            this.image === this.sprites.block.image &&
+            this.blockTimer > 0
+        ) {
+            return; // Don't switch to other animations if blocking
         }
 
 
