@@ -60,6 +60,7 @@ class Fighter extends Sprite {
         imageSrc,
         scale = 1,
         framesMax = 1,
+        blockTimer = 30, // Duration in frames (adjust as needed)
         offset = { x: 0, y: 0 },
         sprites,
         attackBox = { offset: {}, width: undefined, height: undefined }
@@ -71,7 +72,7 @@ class Fighter extends Sprite {
             framesMax,
             offset
         })
-
+        this.blockTimer = blockTimer;
         this.velocity = velocity
         this.width = 625
         this.height = 165
@@ -119,6 +120,14 @@ class Fighter extends Sprite {
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
 
+        // Decrement the block timer
+        if (this.isBlocking && this.blockTimer > 0) {
+            this.blockTimer--;
+            if (this.blockTimer === 0) {
+                this.isBlocking = false;
+            }
+        }
+
         // gravity function
         if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) {
             this.velocity.y = 0
@@ -134,6 +143,11 @@ class Fighter extends Sprite {
     attack2() {
         this.switchSprite('attack2')
         this.isAttacking = true
+    }
+
+    block() {
+        this.switchSprite('block')
+        this.isBlocking = true
     }
 
     takeHit() {
@@ -156,6 +170,7 @@ class Fighter extends Sprite {
                 this.dead = true
             return
         }
+
 
         // overriding all other animations with the attack animation
         if (
@@ -214,6 +229,13 @@ class Fighter extends Sprite {
                 if (this.image !== this.sprites.attack2.image) {
                     this.image = this.sprites.attack2.image
                     this.framesMax = this.sprites.attack2.framesMax
+                    this.framesCurrent = 0
+                }
+                break
+            case 'block':
+                if (this.image !== this.sprites.block.image) {
+                    this.image = this.sprites.block.image
+                    this.framesMax = this.sprites.block.framesMax
                     this.framesCurrent = 0
                 }
                 break

@@ -52,6 +52,8 @@ const gameReset = () => {
     enemy.dead = false;
     player.isAttacking = false;
     enemy.isAttacking = false;
+    player.isBlocking = false;
+    enemy.isBlocking = false;
     player.framesCurrent = 0;
     enemy.framesCurrent = 0;
 
@@ -150,6 +152,10 @@ const player = new Fighter({
             imageSrc: './static/img/zerto/Attack2.png',
             framesMax: 4
         },
+        block: {
+            imageSrc: './static/img/zerto/Block.png',
+            framesMax: 4
+        },
         takeHit: {
             imageSrc: './static/img/zerto/Take Hit - white silhouette.png',
             framesMax: 4
@@ -213,6 +219,10 @@ const enemy = new Fighter({
         },
         attack2: {
             imageSrc: './static/img/kenji/Attack2.png',
+            framesMax: 4
+        },
+        block: {
+            imageSrc: './static/img/kenji/Block.png',
             framesMax: 4
         },
         takeHit: {
@@ -305,18 +315,21 @@ function animate() {
         player.framesCurrent === 2
     ) {
         playHitSound();
-
-        enemy.takeHit()
-        player.isAttacking = false
-
+        enemy.takeHit();
+        player.isAttacking = false;
         gsap.to('#enemyHealth', {
             width: enemy.health + '%'
-        })
+        });
     }
+
 
     // if player misses
     if (player.isAttacking && player.framesCurrent === 4) {
         player.isAttacking = false
+    }
+
+    if (player.isBlocking && player.framesCurrent === 4) {
+        player.isBlocking = false
     }
 
     // this is where our player gets hit
@@ -326,13 +339,18 @@ function animate() {
             rectangle2: player
         }) &&
         enemy.isAttacking &&
-        enemy.framesCurrent == 0 && // Adjust this value based on the start frame of the attack
-        enemy.framesCurrent <= 2 // Adjust this value based on the end frame of the attack
+        enemy.framesCurrent == 0 &&
+        enemy.framesCurrent <= 2 &&
+        !player.isBlocking // Check if player is not blocking
     ) {
         playHitSound();
         player.takeHit();
         enemy.isAttacking = false;
         gsap.to('#playerHealth', { width: player.health + '%' });
+    }
+
+    if (enemy.isBlocking && enemy.framesCurrent === 2) {
+        enemy.isBlocking = false
     }
 
     // if player misses
@@ -380,8 +398,17 @@ window.addEventListener('keydown', (event) => {
             case 'A':
                 player.attack();
                 break;
+            case 'a':
+                player.attack();
+                break;
             case 'S':
                 player.attack2();
+                break;
+            case 's':
+                player.attack2();
+                break;
+            case ' ':
+                player.block();
                 break;
         }
     }
@@ -400,8 +427,6 @@ window.addEventListener('keyup', (event) => {
 
 
 function enemyAI() {
-
-
     if (!enemy.dead) {
         const screenCenterX = canvas.width / 2;
         const enemyDistanceFromCenter = enemy.position.x - screenCenterX;
@@ -430,13 +455,17 @@ function enemyAI() {
             enemy.velocity.y = -15; // Trigger jump
         }
 
-        // Attack logic remains the same
+        // Attack and block logic
         if (!enemy.isAttacking && Math.random() < 0.05) {
             const randomAction = Math.random();
             if (randomAction < 0.6) {
                 enemy.attack();
+            } else if (randomAction < 0.8) {
+                // Slight chance to block
+                enemy.block();
             }
         }
+
 
         // Ensure enemy doesn't fall through the ground
         if (enemy.position.y + enemy.height + enemy.velocity.y >= canvas.height - 96) {
