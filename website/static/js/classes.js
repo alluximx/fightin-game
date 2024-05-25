@@ -4,7 +4,7 @@ class Sprite {
         imageSrc,
         scale = 1,
         framesMax = 1,
-        framesHold = 8,
+        framesHold = 6,
         offset = { x: 0, y: 0 }
     }) {
         this.position = position
@@ -155,9 +155,9 @@ class Fighter extends Sprite {
 
     takeHit() {
         if (this === enemy) {
-            this.health -= 5; // Enemy's hits do 10 damage
+            this.health -= 5; // Enemy's getting git do -3 damage
         } else {
-            this.health -= 2; // Player's hits do 20 damage
+            this.health -= 4; // Player's getting hits do -2 damage
         }
 
         if (this.health <= 0) {

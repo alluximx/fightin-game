@@ -361,7 +361,7 @@ function animate() {
         enemy.isAttacking = false;
     }
 
-    if (enemy.isBlocking && enemy.framesCurrent === 2) {
+    if (enemy.isBlocking && enemy.framesCurrent === 4) {
         enemy.isBlocking = false
     }
 
