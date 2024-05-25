@@ -1,23 +1,20 @@
 function rectangularCollision({ rectangle1, rectangle2 }) {
     // Adjust rectangle1's attackBox position based on its current position and offset
     const r1AttackBox = {
-        x: rectangle1.position.x,
-        y: rectangle1.position.y,
+        x: rectangle1.attackBox.position.x,
+        y: rectangle1.attackBox.position.y,
         width: rectangle1.attackBox.width,
         height: rectangle1.attackBox.height
     };
 
     // Rectangle2's boundaries
     const r2 = {
-        x: rectangle2.position.x + rectangle2.attackBox.offset.x,
-        y: rectangle2.position.y + rectangle2.attackBox.offset.y,
-        width: rectangle2.width / 4,
+        x: rectangle2.position.x,
+        y: rectangle2.position.y,
+        width: rectangle2.width,
         height: rectangle2.height
     };
 
-    // c.fillRect(r1AttackBox.x, r1AttackBox.y, r1AttackBox.width, r1AttackBox.height);
-    // c.fillRect(r2.x, r2.y, r2.width, r2.height);
-    // c.fill
     // Collision detection logic
     return (
         r1AttackBox.x + r1AttackBox.width >= r2.x &&
@@ -41,17 +38,19 @@ function drawAttackBox(entity) {
 }
 
 function determineWinner({ player, enemy, timerId }) {
-    clearTimeout(timerId)
-    document.querySelector('#displayText').style.display = 'flex'
-    if (player.health === enemy.health) {
-        document.querySelector('#displayText').innerHTML = 'Tie'
-    } else if (player.health > enemy.health) {
-        document.querySelector('#displayText').innerHTML = 'Zerto Player Wins'
-    } else if (player.health < enemy.health) {
-        document.querySelector('#displayText').innerHTML = 'Player 2 Wins'
+    if (!gameEnded) {
+        clearTimeout(timerId);
+        document.querySelector('#displayText').style.display = 'flex';
+        if (player.health === enemy.health) {
+            document.querySelector('#displayText').innerHTML = 'Tie';
+        } else if (player.health > enemy.health) {
+            document.querySelector('#displayText').innerHTML = 'Zerto Player Wins';
+        } else if (player.health < enemy.health) {
+            document.querySelector('#displayText').innerHTML = 'Player 2 Wins';
+        }
+        gameEnded = true;
+        setTimeout(showPlayAgainImage, 5000);
     }
-
-    setTimeout(showPlayAgainImage, 5000);
 }
 
 function showPlayAgainImage() {

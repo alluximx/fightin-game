@@ -58,7 +58,7 @@ class Fighter extends Sprite {
         velocity,
         color = 'red',
         imageSrc,
-        scale = 1,
+        scale = 1.5,
         framesMax = 1,
         blockTimer = 30, // Duration in frames (adjust as needed)
         blockDuration = 15, // Duration in frames (adjust as needed)
@@ -93,7 +93,7 @@ class Fighter extends Sprite {
         this.health = 100
         this.framesCurrent = 0
         this.framesElapsed = 0
-        this.framesHold = 10
+        this.framesHold = 6
         this.sprites = sprites
         this.dead = false
 
@@ -170,7 +170,14 @@ class Fighter extends Sprite {
     switchSprite(sprite) {
         if (this.image === this.sprites.death.image) {
             if (this.framesCurrent === this.sprites.death.framesMax - 1)
-                this.dead = true
+                if (this.health <= 0) {
+                    this.dead = true
+                } else 
+                {   
+                    this.image = this.sprites.fall.image
+                    this.framesMax = this.sprites.fall.framesMax
+                    this.framesCurrent = 0
+                }
             return
         }
 
@@ -259,7 +266,8 @@ class Fighter extends Sprite {
                 break
 
             case 'death':
-                if (this.image !== this.sprites.death.image) {
+                console.log(this.health)
+                if (this.image !== this.sprites.death.image && this.health <= 0) {
                     this.image = this.sprites.death.image
                     this.framesMax = this.sprites.death.framesMax
                     this.framesCurrent = 0
