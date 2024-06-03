@@ -411,23 +411,24 @@ window.addEventListener('keydown', (event) => {
                 keys.a.pressed = true;
                 player.lastKey = 'ArrowLeft';
                 break;
-            case 'ArrowUp':
-                player.velocity.y = -20;
-                break;
-            case 'A':
-                player.attack();
-                break;
-            case 'a':
-                player.attack();
-                break;
-            case 'S':
-                player.attack2();
-                break;
-            case 's':
-                player.attack2();
-                break;
+            // Remove some actions
+            // case 'ArrowUp':
+            //     player.velocity.y = -20;
+            //     break;
+            // case 'A':
+            //     player.attack();
+            //     break;
+            // case 'a':
+            //     player.attack();
+            //     break;
+            // case 'S':
+            //     player.attack2();
+            //     break;
+            // case 's':
+            //     player.attack2();
+            //     break;
             case ' ':
-                player.block();
+                player.attack()
                 break;
         }
     }
