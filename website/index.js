@@ -1,6 +1,9 @@
 //const canvas = document.querySelector('canvas')
 const canvas = document.createElement('canvas');
 let gameEnded = true; // start the game
+const targetFPS = 1000;
+const timeStep = 1000 / targetFPS;
+let lastTime = 0;
 
 gsap.ticker.fps(120); // Set target frame rate to 60 FPS
 gsap.ticker.lagSmoothing()
@@ -11,7 +14,6 @@ let gameInfoElement = null;
 const playNowButton = document.querySelector('.play-now'); // Adjust if the class name for the button is different
 const gameReset = () => {
     timer = 60;
-
 
     const playNowDiv = document.querySelector('.play-now'); // This is the container where the game will be displayed
     const gameInfo = document.querySelector('.gameInfo');
@@ -63,7 +65,10 @@ const gameReset = () => {
     decreaseTimer();
 
     gameEnded = false; // Game has started
-    animate(); // Start the game animation or any initialization function
+    lastTime = 0; // Reset the lastTime variable
+
+    animate(0); // Start the game animation with an initial timestamp of 0
+
 };
 
 playNowButton.addEventListener('click', gameReset);
@@ -144,7 +149,7 @@ const player = new Fighter({
             framesMax: 2
         },
         attack1: {
-            imageSrc: './static/img/zerto/Uppercut.png',
+            imageSrc: './static/img/zerto/UppercutCross.png',
             framesMax: 6
         },
         attack2: {
@@ -164,7 +169,7 @@ const player = new Fighter({
             framesMax: 6
         },
         uppercut: {
-            imageSrc: './static/img/zerto/Uppercut.png',
+            imageSrc: './static/img/zerto/UppercutCross.png',
             framesMax: 6
         }
     },
@@ -233,7 +238,7 @@ const enemy = new Fighter({
             framesMax: 6
         },
         uppercut: {
-            imageSrc: './static/img/kenji/Uppercut.png',
+            imageSrc: './static/img/kenji/UppercutCross.png',
             framesMax: 6
         }
     },
@@ -265,124 +270,134 @@ const keys = {
 
 decreaseTimer()
 
-function animate() {
-    startSound.play();
-    enemyAI();
-    window.requestAnimationFrame(animate)
-    c.fillStyle = 'black'
-    c.fillRect(0, 0, canvas.width, canvas.height)
-    background.update()
-    c.fillStyle = 'rgba(255, 255, 255, 0)'
-    c.fillRect(0, 0, canvas.width, canvas.height)
-    player.update()
-    enemy.update()
+function animate(timestamp) {
 
-    player.velocity.x = 0
-    enemy.velocity.x = 0
-    drawAttackBox(player)
-    drawAttackBox(enemy)
+    window.requestAnimationFrame(animate);
+    const deltaTime = timestamp - lastTime;
 
-    // end game based on health
-    if (enemy.health <= 0 || player.health <= 0) {
-        if (!gameEnded) {
-            gameEnded = true;
-            clearTimeout(timerId); // Clear the timer
-            determineWinner({ player, enemy, timerId });
+    console.log(deltaTime);
+    if (deltaTime >= timeStep) {
+        lastTime = timestamp;
+
+        startSound.play();
+        enemyAI();
+        c.fillStyle = 'black'
+        c.fillRect(0, 0, canvas.width, canvas.height)
+        background.update()
+        c.fillStyle = 'rgba(255, 255, 255, 0)'
+        c.fillRect(0, 0, canvas.width, canvas.height)
+        player.update()
+        enemy.update()
+
+        player.velocity.x = 0
+        enemy.velocity.x = 0
+        drawAttackBox(player)
+        drawAttackBox(enemy)
+
+        // end game based on health
+        if (enemy.health <= 0 || player.health <= 0) {
+            if (!gameEnded) {
+                gameEnded = true;
+                clearTimeout(timerId); // Clear the timer
+                determineWinner({ player, enemy, timerId });
+            }
         }
-    }
 
-    // player movement
+        // player movement
 
-    if (keys.a.pressed && player.lastKey === 'ArrowLeft') {
-        player.velocity.x = -5
-        player.switchSprite('run')
-    } else if (keys.d.pressed && player.lastKey === 'ArrowRight') {
-        player.velocity.x = 5
-        player.switchSprite('run')
-    } else {
-        player.switchSprite('run')
-    }
-
-    // jumping
-    if (player.velocity.y < 0) {
-        player.switchSprite('jump')
-    } else if (player.velocity.y > 0) {
-        player.switchSprite('fall')
-    }
-
-
-
-    // detect for collision & enemy gets hit
-    if (
-        rectangularCollision({
-            rectangle1: player,
-            rectangle2: enemy
-        }) &&
-        player.isAttacking &&
-        enemy.framesCurrent == 0 &&
-        enemy.framesCurrent <= 2
-
-    ) {
-        if (enemy.isBlocking) {
-            console.log('enemy is blocking');
-            // Enemy is blocking, reduce or negate the damage
-            // For example, you can reduce the damage by half
-            enemy.health -= 2.5;
+        if (keys.a.pressed && player.lastKey === 'ArrowLeft') {
+            player.velocity.x = -5
+            player.switchSprite('run')
+        } else if (keys.d.pressed && player.lastKey === 'ArrowRight') {
+            player.velocity.x = 5
+            player.switchSprite('run')
         } else {
-            // Enemy is not blocking, apply full damage
-            playHitSound();
-            enemy.takeHit();
-            player.isAttacking = false;
+            player.switchSprite('run')
         }
-        gsap.to('#enemyHealth', { width: enemy.health + '%' });
-    }
 
-    // this is where our player gets hit
-    if (
-        rectangularCollision({
-            rectangle1: enemy,
-            rectangle2: player
-        }) &&
-        enemy.isAttacking &&
-        enemy.framesCurrent == 0 &&
-        enemy.framesCurrent <= 2
-
-    ) {
-        if (player.isBlocking) {
-            // Player is blocking, reduce or negate the damage
-            // For example, you can reduce the damage by half
-            player.health -= 2;
-        } else {
-            // Player is not blocking, apply full damage
-            playHitSound();
-            player.takeHit();
+        // jumping
+        if (player.velocity.y < 0) {
+            player.switchSprite('jump')
+        } else if (player.velocity.y > 0) {
+            player.switchSprite('fall')
         }
-        gsap.to('#playerHealth', { width: player.health + '%' });
-        enemy.isAttacking = false;
-    }
-
-    // if player misses
-    if (player.isAttacking && player.framesCurrent === 4) {
-        player.isAttacking = false
-    }
-
-    if (player.isBlocking && player.framesCurrent === 4) {
-        player.isBlocking = false
-    }
 
 
-    if (enemy.isBlocking && enemy.framesCurrent === 4) {
-        enemy.isBlocking = false
-    }
 
-    // if player misses
-    if (enemy.isAttacking && enemy.framesCurrent === 2) {
-        enemy.isAttacking = false
-    }
+        // detect for collision & enemy gets hit
+        if (
+            rectangularCollision({
+                rectangle1: player,
+                rectangle2: enemy
+            }) &&
+            player.isAttacking &&
+            enemy.framesCurrent == 0 &&
+            enemy.framesCurrent <= 2
 
-    // end game based on health
-    if ((enemy.health <= 0 || player.health <= 0) && !gameEnded) {
-        determineWinner({ player, enemy, timerId })
+        ) {
+            if (enemy.isBlocking) {
+                console.log('enemy is blocking');
+                // Enemy is blocking, reduce or negate the damage
+                // For example, you can reduce the damage by half
+                enemy.health -= 2.5;
+            } else {
+                // Enemy is not blocking, apply full damage
+                playHitSound();
+                enemy.takeHit();
+                player.isAttacking = false;
+            }
+            gsap.to('#enemyHealth', { width: enemy.health + '%' });
+        }
+
+        // this is where our player gets hit
+        if (
+            rectangularCollision({
+                rectangle1: enemy,
+                rectangle2: player
+            }) &&
+            enemy.isAttacking &&
+            enemy.framesCurrent == 0 &&
+            enemy.framesCurrent <= 2
+
+        ) {
+            if (player.isBlocking) {
+                // Player is blocking, reduce or negate the damage
+                // For example, you can reduce the damage by half
+                player.health -= 2;
+            } else {
+                // Player is not blocking, apply full damage
+                playHitSound();
+                player.takeHit();
+            }
+            gsap.to('#playerHealth', { width: player.health + '%' });
+            enemy.isAttacking = false;
+        }
+
+        // if player misses
+        if (player.isAttacking && player.framesCurrent === 4) {
+            player.isAttacking = false
+        }
+
+        if (player.isBlocking && player.framesCurrent === 4) {
+            player.isBlocking = false
+        }
+
+
+        if (enemy.isBlocking && enemy.framesCurrent === 4) {
+            enemy.isBlocking = false
+        }
+
+        // if player misses
+        if (enemy.isAttacking && enemy.framesCurrent === 2) {
+            enemy.isAttacking = false
+        }
+
+        // end game based on health
+        if ((enemy.health <= 0 || player.health <= 0) && !gameEnded) {
+            determineWinner({ player, enemy, timerId })
+        }
+
+
     }
 }
 
@@ -453,6 +468,7 @@ function enemyAI() {
 
         // Basic left and right movement logic with slight randomness
         if (enemyDistanceFromCenter < -50 || Math.random() < 0.1) {
+
             enemy.velocity.x = 3 * moveDirection; // Move in random direction when too left or occasionally
             enemy.switchSprite('run');
         } else if (enemyDistanceFromCenter > 50 || Math.random() < 0.1) {
