@@ -169,7 +169,7 @@ const player = new Fighter({
             framesMax: 6
         },
         uppercut: {
-            imageSrc: './static/img/zerto/UppercutCross.png',
+            imageSrc: './static/img/zerto/Uppercut.png',
             framesMax: 6
         }
     },
@@ -218,8 +218,8 @@ const enemy = new Fighter({
             framesMax: 2
         },
         attack1: {
-            imageSrc: './static/img/kenji/Attack1.png',
-            framesMax: 4
+            imageSrc: './static/img/kenji/UppercutCross.png',
+            framesMax: 6
         },
         attack2: {
             imageSrc: './static/img/kenji/Attack2.png',
@@ -238,7 +238,7 @@ const enemy = new Fighter({
             framesMax: 6
         },
         uppercut: {
-            imageSrc: './static/img/kenji/UppercutCross.png',
+            imageSrc: './static/img/kenji/Uppercut.png',
             framesMax: 6
         }
     },
@@ -486,10 +486,10 @@ function enemyAI() {
             }
         }
 
-        // Occasionally jump
-        if (Math.random() < 0.02 && enemy.position.y >= canvas.height - 96 - enemy.height) { // Check if on ground
-            enemy.velocity.y = -15; // Trigger jump
-        }
+        // // Occasionally jump
+        // if (Math.random() < 0.02 && enemy.position.y >= canvas.height - 96 - enemy.height) { // Check if on ground
+        //     enemy.velocity.y = -15; // Trigger jump
+        // }
 
         // Attack and block logic
         if (!enemy.isAttacking && Math.random() < 0.05 && !enemy.isBlocking) {
