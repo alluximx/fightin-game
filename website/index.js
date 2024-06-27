@@ -149,7 +149,7 @@ const player = new Fighter({
             framesMax: 2
         },
         attack1: {
-            imageSrc: './static/img/zerto/AtaqueR.png',
+            imageSrc: './static/img/zerto/Attack1.png',
             framesMax: 4
         },
         attack2: {
@@ -218,7 +218,7 @@ const enemy = new Fighter({
             framesMax: 2
         },
         attack1: {
-            imageSrc: './static/img/kenji/Ataque.png',
+            imageSrc: './static/img/kenji/Attack1.png',
             framesMax: 4
         },
         attack2: {
