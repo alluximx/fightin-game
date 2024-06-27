@@ -149,8 +149,8 @@ const player = new Fighter({
             framesMax: 2
         },
         attack1: {
-            imageSrc: './static/img/zerto/UppercutCross.png',
-            framesMax: 6
+            imageSrc: './static/img/zerto/AtaqueR.png',
+            framesMax: 4
         },
         attack2: {
             imageSrc: './static/img/zerto/Attack2.png',
@@ -169,7 +169,7 @@ const player = new Fighter({
             framesMax: 6
         },
         uppercut: {
-            imageSrc: './static/img/zerto/UppercutCross.png',
+            imageSrc: './static/img/zerto/UpperCutCross.png',
             framesMax: 6
         }
     },
@@ -218,7 +218,7 @@ const enemy = new Fighter({
             framesMax: 2
         },
         attack1: {
-            imageSrc: './static/img/kenji/Attack1.png',
+            imageSrc: './static/img/kenji/Ataque.png',
             framesMax: 4
         },
         attack2: {
@@ -238,7 +238,7 @@ const enemy = new Fighter({
             framesMax: 6
         },
         uppercut: {
-            imageSrc: './static/img/kenji/UppercutCross.png',
+            imageSrc: './static/img/kenji/UpperCutCross.png',
             framesMax: 6
         }
     },
@@ -275,7 +275,6 @@ function animate(timestamp) {
     window.requestAnimationFrame(animate);
     const deltaTime = timestamp - lastTime;
 
-    console.log(deltaTime);
     if (deltaTime >= timeStep) {
         lastTime = timestamp;
 
@@ -487,9 +486,9 @@ function enemyAI() {
         }
 
         // Occasionally jump
-        if (Math.random() < 0.02 && enemy.position.y >= canvas.height - 96 - enemy.height) { // Check if on ground
-            enemy.velocity.y = -15; // Trigger jump
-        }
+        // if (Math.random() < 0.02 && enemy.position.y >= canvas.height - 96 - enemy.height) { // Check if on ground
+        //     enemy.velocity.y = -15; // Trigger jump
+        // }
 
         // Attack and block logic
         if (!enemy.isAttacking && Math.random() < 0.05 && !enemy.isBlocking) {
