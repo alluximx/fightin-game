@@ -13,6 +13,8 @@ let gameInfoElement = null;
 
 const playNowButton = document.querySelector('.play-now'); // Adjust if the class name for the button is different
 const gameReset = () => {
+    gameEnded = false; // Set gameEnded to false at the start of reset
+
     timer = 60;
 
     const playNowDiv = document.querySelector('.play-now'); // This is the container where the game will be displayed
@@ -92,8 +94,10 @@ canvas.height = 576
 c.fillRect(0, 0, canvas.width, canvas.height)
 
 function playHitSound() {
-    hitSounds[currentHitSoundIndex].play();
-    currentHitSoundIndex = (currentHitSoundIndex + 1) % hitSounds.length;
+    if (!gameEnded) {
+        hitSounds[currentHitSoundIndex].play();
+        currentHitSoundIndex = (currentHitSoundIndex + 1) % hitSounds.length;
+    }
 }
 
 const gravity = 0.7
