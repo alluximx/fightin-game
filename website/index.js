@@ -149,8 +149,8 @@ const player = new Fighter({
             framesMax: 2
         },
         attack1: {
-            imageSrc: './static/img/zerto/Attack1.png',
-            framesMax: 4
+            imageSrc: './static/img/zerto/UpperCutCross.png',
+            framesMax: 6
         },
         attack2: {
             imageSrc: './static/img/zerto/Attack2.png',
@@ -161,7 +161,7 @@ const player = new Fighter({
             framesMax: 4
         },
         takeHit: {
-            imageSrc: './static/img/zerto/Take Hit - white silhouette.png',
+            imageSrc: './static/img/zerto/Take Hit.png',
             framesMax: 4
         },
         death: {
