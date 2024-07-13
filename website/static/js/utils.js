@@ -1,26 +1,32 @@
 function rectangularCollision({ rectangle1, rectangle2 }) {
-    // Adjust rectangle1's attackBox position based on its current position and offset
-    const r1AttackBox = {
-        x: rectangle1.attackBox.position.x,
-        y: rectangle1.attackBox.position.y,
-        width: rectangle1.attackBox.width,
-        height: rectangle1.attackBox.height
+    const proximityThreshold = 200; // Increased from 100 to 200, adjust as needed
+
+    // Calculate the center points of both rectangles
+    const r1Center = {
+        x: rectangle1.position.x + rectangle1.width / 2,
+        y: rectangle1.position.y + rectangle1.height / 2
+    };
+    const r2Center = {
+        x: rectangle2.position.x + rectangle2.width / 2,
+        y: rectangle2.position.y + rectangle2.height / 2
     };
 
-    // Rectangle2's boundaries
-    const r2 = {
-        x: rectangle2.position.x,
-        y: rectangle2.position.y,
-        width: rectangle2.width,
-        height: rectangle2.height
-    };
+    // Calculate the distance between the centers
+    const distance = Math.sqrt(
+        Math.pow(r1Center.x - r2Center.x, 2) + 
+        Math.pow(r1Center.y - r2Center.y, 2)
+    );
 
-    // Collision detection logic
+    // Check if the distance is within the proximity threshold
+    if (distance > proximityThreshold) {
+        return false;
+    }
+
+    // If within proximity, perform a more lenient collision check
     return (
-        r1AttackBox.x + r1AttackBox.width >= r2.x &&
-        r1AttackBox.x <= r2.x + r2.width &&
-        r1AttackBox.y + r1AttackBox.height >= r2.y &&
-        r1AttackBox.y <= r2.y + r2.height
+        rectangle1.attackBox.position.x + rectangle1.attackBox.width >= rectangle2.position.x &&
+        rectangle1.attackBox.position.x <= rectangle2.position.x + rectangle2.width &&
+        Math.abs(rectangle1.position.y - rectangle2.position.y) < 100 // Vertical proximity check
     );
 }
 
