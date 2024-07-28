@@ -52,7 +52,7 @@ function determineWinner({ player, enemy, timerId }) {
         } else if (player.health > enemy.health) {
             document.querySelector('#displayText').innerHTML = 'Zerto Player Wins';
         } else if (player.health < enemy.health) {
-            document.querySelector('#displayText').innerHTML = 'Player 2 Wins';
+            document.querySelector('#displayText').innerHTML = 'Dell Wins';
         }
         gameEnded = true;
         setTimeout(showPlayAgainImage, 5000);

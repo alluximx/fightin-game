@@ -1,14 +1,84 @@
 //const canvas = document.querySelector('canvas')
 const canvas = document.createElement('canvas');
 let gameEnded = true; // start the game
-const targetFPS = 1000;
+const targetFPS = 100;
 const timeStep = 1000 / targetFPS;
 let lastTime = 0;
+let isPaused = false;
+
+let gameStarted = false;
+
+// Create a pause button
+const pauseButton = document.createElement('button');
+pauseButton.textContent = 'Pause';
+pauseButton.style.position = 'absolute';
+pauseButton.style.top = '495px';
+pauseButton.style.right = '1250px';
+pauseButton.style.zIndex = '1000';
+document.body.appendChild(pauseButton);
 
 gsap.ticker.fps(120); // Set target frame rate to 60 FPS
 gsap.ticker.lagSmoothing()
 
 let gameInfoElement = null;
+// Add this to the top of your index.js file
+let isMuted = false;
+
+// Create a mute button
+const muteButton = document.createElement('button');
+muteButton.textContent = 'Mute';
+muteButton.style.position = 'absolute';
+muteButton.style.top = '495px';
+muteButton.style.right = '1350px';
+muteButton.style.zIndex = '1000';
+document.body.appendChild(muteButton);
+
+
+function togglePause() {
+    isPaused = !isPaused;
+    pauseButton.textContent = isPaused ? 'Resume' : 'Pause';
+    
+    if (isPaused) {
+        cancelAnimationFrame(animationId);
+        clearTimeout(timerId);
+    } else {
+        animate(performance.now());
+        decreaseTimer();
+    }
+
+    toggleMute()
+}
+
+pauseButton.addEventListener('click', togglePause);
+
+
+// Mute/unmute function
+function toggleMute() {
+    isMuted = !isMuted;
+    muteButton.textContent = isMuted ? 'Unmute' : 'Mute';
+
+    // Mute/unmute all audio elements
+    [startSound, ...hitSounds].forEach(sound => {
+        sound.muted = isMuted;
+    });
+}
+
+muteButton.addEventListener('click', toggleMute);
+
+function startGame() {
+    if (!gameStarted) {
+        gameStarted = true;
+        gameEnded = false; // Reset gameEnded state
+        gameReset();
+        // Hide the popup or start screen here
+        const popup = document.querySelector('#popup');
+        if (popup) {
+            popup.style.display = 'none';
+        }
+  
+    }
+}
+
 
 
 const playNowButton = document.querySelector('.play-now'); // Adjust if the class name for the button is different
@@ -73,7 +143,28 @@ const gameReset = () => {
 
 };
 
-playNowButton.addEventListener('click', gameReset);
+
+
+document.addEventListener('keydown', function(event) {
+    // Prevent spacebar from scrolling the page
+    if (event.code === 'Space') {
+        event.preventDefault();
+    }
+    startGame();
+});
+
+// Event listener for popup button click
+const popupButton = document.querySelector('.popup-content');
+if (popupButton) {
+    popupButton.addEventListener('click', startGame);
+}
+
+// Event listener for "Press any key to start" text
+const playNowText = document.querySelector('.play-now .text-wrapper-2');
+if (playNowText) {
+    playNowText.addEventListener('click', startGame);
+}
+
 
 const c = canvas.getContext('2d')
 const startSound = new Audio('./static/audio/boxing_ring.wav');
@@ -94,7 +185,7 @@ canvas.height = 576
 c.fillRect(0, 0, canvas.width, canvas.height)
 
 function playHitSound() {
-    if (!gameEnded) {
+    if (!gameEnded && !isMuted) {
         hitSounds[currentHitSoundIndex].play();
         currentHitSoundIndex = (currentHitSoundIndex + 1) % hitSounds.length;
     }
@@ -273,138 +364,152 @@ const keys = {
 }
 
 decreaseTimer()
+let animationId;
 
 function animate(timestamp) {
 
-    window.requestAnimationFrame(animate);
-    const deltaTime = timestamp - lastTime;
+    if (!isPaused) {
+        window.requestAnimationFrame(animate);
+        const deltaTime = timestamp - lastTime;
 
-    if (deltaTime >= timeStep) {
-        lastTime = timestamp;
+        if (deltaTime >= timeStep) {
+            lastTime = timestamp;
 
-        startSound.play();
-        enemyAI();
-        c.fillStyle = 'black'
-        c.fillRect(0, 0, canvas.width, canvas.height)
-        background.update()
-        c.fillStyle = 'rgba(255, 255, 255, 0)'
-        c.fillRect(0, 0, canvas.width, canvas.height)
-        player.update()
-        enemy.update()
-
-        player.velocity.x = 0
-        enemy.velocity.x = 0
-        drawAttackBox(player)
-        drawAttackBox(enemy)
-
-        // end game based on health
-        if (enemy.health <= 0 || player.health <= 0) {
-            if (!gameEnded) {
-                gameEnded = true;
-                clearTimeout(timerId); // Clear the timer
-                determineWinner({ player, enemy, timerId });
+            if (!isMuted) {
+                startSound.play();
             }
-        }
 
-        // player movement
+            enemyAI();
+            c.fillStyle = 'black'
+            c.fillRect(0, 0, canvas.width, canvas.height)
+            background.update()
+            c.fillStyle = 'rgba(255, 255, 255, 0)'
+            c.fillRect(0, 0, canvas.width, canvas.height)
+            player.update()
+            enemy.update()
 
-        if (keys.a.pressed && player.lastKey === 'ArrowLeft') {
-            player.velocity.x = -5
-            player.switchSprite('run')
-        } else if (keys.d.pressed && player.lastKey === 'ArrowRight') {
-            player.velocity.x = 5
-            player.switchSprite('run')
-        } else {
-            player.switchSprite('run')
-        }
+            player.velocity.x = 0
+            enemy.velocity.x = 0
+            drawAttackBox(player)
+            drawAttackBox(enemy)
 
-        // jumping
-        if (player.velocity.y < 0) {
-            player.switchSprite('jump')
-        } else if (player.velocity.y > 0) {
-            player.switchSprite('fall')
-        }
+            // end game based on health
+            if (enemy.health <= 0 || player.health <= 0) {
+                if (!gameEnded) {
+                    gameEnded = true;
+                    clearTimeout(timerId); // Clear the timer
+                    determineWinner({ player, enemy, timerId });
+                }
+            }
 
+            // player movement
 
-
-        // detect for collision & enemy gets hit
-        if (
-            rectangularCollision({
-                rectangle1: player,
-                rectangle2: enemy
-            }) &&
-            player.isAttacking &&
-            enemy.framesCurrent == 0 &&
-            enemy.framesCurrent <= 2
-
-        ) {
-            if (enemy.isBlocking) {
-                console.log('enemy is blocking');
-                // Enemy is blocking, reduce or negate the damage
-                // For example, you can reduce the damage by half
-                enemy.health -= 2.5;
+            if (keys.a.pressed && player.lastKey === 'ArrowLeft') {
+                player.velocity.x = -5
+                player.switchSprite('run')
+            } else if (keys.d.pressed && player.lastKey === 'ArrowRight') {
+                player.velocity.x = 5
+                player.switchSprite('run')
             } else {
-                // Enemy is not blocking, apply full damage
-                playHitSound();
-                enemy.takeHit();
-                player.isAttacking = false;
+                player.switchSprite('run')
             }
-            gsap.to('#enemyHealth', { width: enemy.health + '%' });
-        }
 
-        // this is where our player gets hit
-        if (
-            rectangularCollision({
-                rectangle1: enemy,
-                rectangle2: player
-            }) &&
-            enemy.isAttacking &&
-            enemy.framesCurrent == 0 &&
-            enemy.framesCurrent <= 2
-
-        ) {
-            if (player.isBlocking) {
-                // Player is blocking, reduce or negate the damage
-                // For example, you can reduce the damage by half
-                player.health -= 2;
-            } else {
-                // Player is not blocking, apply full damage
-                playHitSound();
-                player.takeHit();
+            // jumping
+            if (player.velocity.y < 0) {
+                player.switchSprite('jump')
+            } else if (player.velocity.y > 0) {
+                player.switchSprite('fall')
             }
-            gsap.to('#playerHealth', { width: player.health + '%' });
-            enemy.isAttacking = false;
+
+
+
+            // detect for collision & enemy gets hit
+            if (
+                rectangularCollision({
+                    rectangle1: player,
+                    rectangle2: enemy
+                }) &&
+                player.isAttacking &&
+                enemy.framesCurrent == 0 &&
+                enemy.framesCurrent <= 2
+
+            ) {
+                if (enemy.isBlocking) {
+                    console.log('enemy is blocking');
+                    // Enemy is blocking, reduce or negate the damage
+                    // For example, you can reduce the damage by half
+                    enemy.health -= 2.5;
+                } else {
+                    // Enemy is not blocking, apply full damage
+                    playHitSound();
+                    enemy.takeHit();
+                    player.isAttacking = false;
+                }
+                gsap.to('#enemyHealth', { width: enemy.health + '%' });
+            }
+
+            // this is where our player gets hit
+            if (
+                rectangularCollision({
+                    rectangle1: enemy,
+                    rectangle2: player
+                }) &&
+                enemy.isAttacking &&
+                enemy.framesCurrent == 0 &&
+                enemy.framesCurrent <= 2
+
+            ) {
+                if (player.isBlocking) {
+                    // Player is blocking, reduce or negate the damage
+                    // For example, you can reduce the damage by half
+                    player.health -= 2;
+                } else {
+                    // Player is not blocking, apply full damage
+                    playHitSound();
+                    player.takeHit();
+                }
+                gsap.to('#playerHealth', { width: player.health + '%' });
+                enemy.isAttacking = false;
+            }
+
+            // if player misses
+            if (player.isAttacking && player.framesCurrent === 4) {
+                player.isAttacking = false
+            }
+
+            if (player.isBlocking && player.framesCurrent === 4) {
+                player.isBlocking = false
+            }
+
+
+            if (enemy.isBlocking && enemy.framesCurrent === 4) {
+                enemy.isBlocking = false
+            }
+
+            // if player misses
+            if (enemy.isAttacking && enemy.framesCurrent === 2) {
+                enemy.isAttacking = false
+            }
+
+            // end game based on health
+            if ((enemy.health <= 0 || player.health <= 0) && !gameEnded) {
+                determineWinner({ player, enemy, timerId })
+            }
+
+
         }
-
-        // if player misses
-        if (player.isAttacking && player.framesCurrent === 4) {
-            player.isAttacking = false
-        }
-
-        if (player.isBlocking && player.framesCurrent === 4) {
-            player.isBlocking = false
-        }
-
-
-        if (enemy.isBlocking && enemy.framesCurrent === 4) {
-            enemy.isBlocking = false
-        }
-
-        // if player misses
-        if (enemy.isAttacking && enemy.framesCurrent === 2) {
-            enemy.isAttacking = false
-        }
-
-        // end game based on health
-        if ((enemy.health <= 0 || player.health <= 0) && !gameEnded) {
-            determineWinner({ player, enemy, timerId })
-        }
-
-
     }
 }
 
 // animate()
+
+// Add event listener to pause when clicking outside the game
+// document.addEventListener('click', function(event) {
+//     if (!canvas.contains(event.target) && !isPaused && !gameEnded) {
+//         togglePause();
+//     }
+// });
+
 
 
 window.addEventListener('keydown', function (event) {
